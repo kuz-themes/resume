@@ -1,4 +1,17 @@
 
+mixin PageImage()
+	div.image
+		img(src="x/dist/img/user.png")
 
+mixin PageTitle()
+	div.title
+		h1= page.Title()
+
+mixin PageGitHubSourceLink()
+	- let repo = page.Site().meta.json.meta.SITE_REPO
+	if repo
+		- let source = repo + "/blob/master/" + page.inputFilePath
+		div.source
+			a(href=source) View Source
 
 

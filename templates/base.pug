@@ -25,17 +25,12 @@ html(lang="en")
 			div.header
 				div.image
 					img(src="x/dist/img/user.png")
-				div.title
-					h1= page.Title()
 
+				+PageTitle()
 				+PageAuthor()
 				+PageDescription()
+				+PageGitHubSourceLink()
 
-				- let repo = page.Site().meta.json.meta.SITE_REPO
-				if repo
-					- let source = repo + "/blob/master/" + page.inputFilePath
-					div.source
-						a(href=source) View Source
 		article
 			div
 				block content
