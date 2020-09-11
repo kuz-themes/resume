@@ -27,14 +27,10 @@ html(lang="en")
 					img(src="x/dist/img/user.png")
 				div.title
 					h1= page.Title()
-				if page.IsPage() && page.Show("author")
-					- let author = page.Author()
-					if author
-						div.author
-							p Written by #[a(href=author.RelativeURL())= author.Title()]
-				if page.Show("description")
-					div.description
-						p= page.Description()
+
+				+PageAuthor()
+				+PageDescription()
+
 				- let repo = page.Site().meta.json.meta.SITE_REPO
 				if repo
 					- let source = repo + "/blob/master/" + page.inputFilePath
