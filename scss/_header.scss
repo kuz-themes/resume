@@ -1,0 +1,44 @@
+
+header {
+	background-color: #424242;
+	color: #fff;
+	& > div.navbar {
+		background-color: rgba(0, 0, 0, 0.4);
+		padding: 5px 0px;
+		padding-top: 12px;
+		& > ul {
+			list-style-type: none;
+			padding: 0px;
+			text-align: center;
+			& > li {
+				display: inline-block;
+				margin: 0;
+			}
+		}
+	}
+	& > div.header {
+		text-align: center;
+		max-width: $max-width;
+		margin: auto;
+		padding: 50px 10px;
+		& > div.image {
+			display: inline-block;
+			overflow: hidden;
+			width: 176px;
+			height: 176px;
+			border-radius: 50%;
+			border: 8px solid #fff;
+			background-color: #ddd;
+			& > img {
+				width: 160px;
+				height: 160px;
+			}
+		}
+		& > div.title {
+		}
+		& > div.description {
+		}
+	}
+}
+
+

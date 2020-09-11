@@ -1,0 +1,77 @@
+include mixins
+
+doctype html
+html(lang="en")
+	head
+		meta(charset='utf-8')
+		meta(name="description" itemprop="description" content=page.Description())
+
+		title= page.Title()
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+
+		if page.HasRelativeBase()
+			base(href=page.Base())
+		else
+			base(href=page.Site().meta.json.meta.SITE_URL)
+
+		link(rel="stylesheet", href="x/dist/themes/resume/css/resume.css")
+
+		- let analytics = page.Site().meta.json.analytics
+		if analytics != undefined
+			| !{page.Site().GetDataFileContents(analytics)}
+
+	body
+		header
+			if page.Show("navbar")
+				div.navbar
+					ul
+						each node in page.Site().meta.json["navbar"]	
+							li
+								a(href=node.url).navbar= node.title
+			div.header
+				div.image
+					img(src="x/dist/img/user.png")
+				div.title
+					h1= page.Title()
+				if page.IsPage() && page.Show("author")
+					- let author = page.Author()
+					if author
+						div.author
+							p Written by #[a(href=author.RelativeURL())= author.Title()]
+				if page.Show("description")
+					div.description
+						p= page.Description()
+				- let repo = page.Site().meta.json.meta.SITE_REPO
+				if repo
+					- let source = repo + "/blob/master/" + page.inputFilePath
+					div.source
+						a(href=source) View Source
+		article
+			div
+				block content
+
+		- let quote = page.GetProperty("quote").value;
+		if quote
+			footer.zero
+				div
+					p= blackadder[quote]
+
+		footer.one
+			div.info
+				h4 More Information
+				ul
+					each node in page.Site().meta.json["info"]
+						+InfoLink(node)
+			div.social
+				h4 Social Media
+				ul
+					each node in page.Site().meta.json["social"]
+						+SocialLink(node)
+
+		footer.two
+			div
+				p &copy; Copyright 2020, Ankur Seth. Made with #[a(href="https://kaagazz.com/") Kaagazz]. Hosted on #[a(href="https://github.com/madhumeya/ankurseth.in") GitHub].
+
+		//script(src="x/dist/js/resume.js")
+
+

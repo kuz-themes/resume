@@ -1,0 +1,35 @@
+
+mixin HoverLinkInternal(text, url)
+	a.hover-link(href=url)
+		div.link-title= text
+		div.link-border
+
+mixin HoverLink(link)
+	+HoverLinkInternal(link["title"], link["url"])
+
+mixin InfoLink(link)
+	li
+		+HoverLinkInternal(link["title"], link["url"])
+
+mixin SocialLink(link)
+	li #{link["title"]}: 
+		+HoverLinkInternal("@madhumeya", link["url"])
+
+mixin CategoryWithCounter(category)
+	- let count = category.GetPagesCount();
+	if count > 0
+		li
+			a(href=category.RelativeURL()).category
+				span.text= category.GetTitle()
+				span.count= count
+
+mixin TagWithCounter(tag)
+	- let count = tag.GetPagesCount();
+	if count > 0
+		li
+			a(href=tag.RelativeURL()).tag
+				span.text= tag.GetTitle()
+				span.count= count
+
+
+
