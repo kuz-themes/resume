@@ -1,3 +1,4 @@
+include ../../kz_default/templates/mixins
 include mixins
 
 doctype html
@@ -16,18 +17,11 @@ html(lang="en")
 
 		link(rel="stylesheet", href="x/dist/themes/resume/css/resume.css")
 
-		- let analytics = page.Site().meta.json.analytics
-		if analytics != undefined
-			| !{page.Site().GetDataFileContents(analytics)}
+		+Analytics()
 
 	body
 		header
-			if page.Show("navbar")
-				div.navbar
-					ul
-						each node in page.Site().meta.json["navbar"]	
-							li
-								a(href=node.url).navbar= node.title
+			+NavBar()
 			div.header
 				div.image
 					img(src="x/dist/img/user.png")
@@ -57,16 +51,8 @@ html(lang="en")
 					p= blackadder[quote]
 
 		footer.one
-			div.info
-				h4 More Information
-				ul
-					each node in page.Site().meta.json["info"]
-						+InfoLink(node)
-			div.social
-				h4 Social Media
-				ul
-					each node in page.Site().meta.json["social"]
-						+SocialLink(node)
+			+InformationSectionFooter()
+			+SocialSectionFooter()
 
 		footer.two
 			div
