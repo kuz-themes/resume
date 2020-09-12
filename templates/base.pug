@@ -4,16 +4,13 @@ include mixins
 doctype html
 html(lang="en")
 	head
-		meta(charset='utf-8')
-		meta(name="description" itemprop="description" content=page.Description())
+		+MetaCharset()
+		+MetaSEO()
 
 		title= page.Title()
-		meta(name="viewport" content="width=device-width, initial-scale=1")
+		+MetaViewport()
 
-		if page.HasRelativeBase()
-			base(href=page.Base())
-		else
-			base(href=page.Site().meta.json.meta.SITE_URL)
+		+BaseURL()
 
 		link(rel="stylesheet", href="x/dist/themes/resume/css/resume.css")
 
@@ -23,9 +20,7 @@ html(lang="en")
 		header
 			+NavBar()
 			div.header
-				div.image
-					img(src="x/dist/img/user.png")
-
+				+PageImage()
 				+PageTitle()
 				+PageAuthor()
 				+PageDescription()
