@@ -2,5 +2,15 @@
 	"meta": {
 		"name": "Resume theme",
 		"version": "0.1"
-	}
+	},
+
+	"layouts": [
+		{
+			"description": "",
+			"default": true,
+			"name": "resume",
+			"path": "resume.pug",
+			"title": ""
+		}
+	]
 }
