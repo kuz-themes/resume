@@ -1,0 +1,13 @@
+
+mixin DefaultPagination()
+	div.top
+	div.middle
+		div.previous
+			if page.previous
+				a(href=page.previous.getRelativeURL())= page.previous.getTitle()
+		div.next
+			if page.next
+				a(href=page.next.getRelativeURL())= page.next.getTitle()
+	div.bottom
+
+

@@ -1,0 +1,42 @@
+
+mixin CategoriesSectionFooter()
+	div.categories
+		h4 Categories Index
+		ul
+			each category in kuz.site.getCategories()
+				li
+					a(href=category.getRelativeURL()).category
+						span.text= category.getTitle()
+
+mixin TagsSectionFooter()
+	div.tags
+		h4 Tags Index
+		ul
+			each tag in kuz.site.getTags()
+				li
+					a(href=tag.getRelativeURL()).tag
+						span.text= tag.getTitle()
+
+mixin InformationSectionFooter()
+	div.info
+		h4 More Information
+		ul
+			each node in kuz.s.jsons.footer["info"]
+				+InfoLink(node)
+
+mixin SocialSectionFooter()
+	div.social
+		h4 Social Media
+		ul
+			each node in kuz.s.jsons.footer["social"]
+				+SocialLink(node)
+
+mixin SimpleCopyright()
+	div
+		h5 &copy; Copyright 2020, Ankur Seth. All Rights Reserved.
+
+mixin MadeWithCopyright()
+	div
+		p &copy; Copyright 2020, Ankur Seth. Made with #[a(href="https://kaagazz.com/") Kaagazz]. Hosted on #[a(href="https://github.com/madhumeya/ankurseth.in") GitHub].
+
+

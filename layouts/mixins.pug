@@ -1,4 +1,65 @@
+include mixins/debug
 
+include mixins/head
+include mixins/header
+include mixins/article
+include mixins/pagination
+include mixins/footer
+
+mixin HoverLinkInternal(text, url)
+	a.hover-link(href=url)
+		div.link-title= text
+		div.link-border
+
+mixin HoverLink(link)
+	+HoverLinkInternal(link["title"], link["url"])
+
+mixin InfoLink(link)
+	li
+		+HoverLinkInternal(link["title"], link["url"])
+
+mixin SocialLink(link)
+	li #{link["title"]}: 
+		+HoverLinkInternal("@" + link["name"], link["url"])
+
+mixin PageCard(page)
+	li
+		div.page-card
+			div.top
+				- let category = page.getCategory()
+				p Posted in #[a(href=category.getRelativeURL()).category.light= category.getTitle()]
+			div.middle
+				h2
+					a(href=page.getRelativeURL())= page.getTitle()
+				p= page.getDescription()
+			div.bottom
+				ul.unset
+					each tag in page.getTags()
+						li
+							a(href=tag.getRelativeURL()).tag.light= tag.getTitle()
+
+mixin ListPages(pages)
+	div.pages
+		ul.unset
+			each page in pages
+				if page.isVisible()
+					+PageCard(page)
+
+mixin CategoryWithCounter(category)
+	- let count = category.getPagesCount();
+	if count > 0
+		li
+			a(href=category.getRelativeURL()).category
+				span.text= category.getTitle()
+				span.count= count
+
+mixin TagWithCounter(tag)
+	- let count = tag.getPagesCount();
+	if count > 0
+		li
+			a(href=tag.getRelativeURL()).tag
+				span.text= tag.getTitle()
+				span.count= count
 
 
 
